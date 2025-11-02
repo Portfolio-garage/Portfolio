@@ -313,6 +313,70 @@ main, header, .container, #app { position: relative; z-index: 1 }
   .vt-content ul { padding-left: 0.6rem }
 }
 
+/* Mobile-specific hamburger and more aggressive downscaling for phones */
+@media (max-width: 480px) {
+  /* reduce base font-size for compactness */
+  html, body { font-size: 14px }
+
+  /* hide full nav by default to avoid crowded header; show hamburger instead */
+  .hamburger { display: inline-flex; flex-direction: column; gap: 4px; align-items: center; justify-content: center; padding: 8px; margin-left: 8px; border-radius: 8px; background: transparent; border:1px solid rgba(255,255,255,0.03); }
+  .hamburger:hover { border-color: rgba(255,255,255,0.06) }
+  .hamburger-bar { display:block; width:20px; height:2px; background: var(--fg); opacity:0.95; border-radius:2px }
+
+  /* hide default links row on very small screens to be replaced by the expanded menu */
+  header.topnav .links { display: none }
+
+  /* when mobile menu is opened, display nav as a vertical full-width list beneath header */
+  header.topnav.mobile-open .links {
+    display:flex;
+    flex-direction:column;
+    gap:0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.65), rgba(0,0,0,0.55));
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 56px;
+    padding: 8px 0;
+    border-top: 1px solid rgba(255,255,255,0.02);
+    z-index: 90;
+  }
+  header.topnav.mobile-open .links a { display:block; padding: 12px 16px; font-size: 1rem; border-radius: 0 }
+
+  /* slightly reduce prominent headings for phones */
+  .section-heading { font-size: 1.6rem }
+  h1 { font-size: 1.4rem }
+  .name { font-size: 1.6rem }
+
+  /* reduce tile padding even more on tiny phones */
+  .tile, .section-shell .tile { padding: 8px }
+  .timeline-item { padding: 6px }
+
+  /* ensure main content remains scrollable and not obstructed by the expanded nav */
+  /* bring header closer to top on phones */
+  #app { padding-top: 2px }
+}
+
+/* overlay / backdrop when mobile menu is open: blur the main content (not the header) for readability */
+/* place the overlay on <main> (sibling of the header) when header has .mobile-open */
+header.topnav.mobile-open ~ main::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  z-index: 85; /* below header (120) and below header .links (which are inside header), above page content */
+  pointer-events: none; /* visually de-emphasize background but keep menu links clickable */
+}
+
+/* hide hamburger by default on larger screens */
+@media (min-width: 481px) {
+  .hamburger { display: none }
+}
+
+/* ensure the mobile menu sits above content if opened */
+header.topnav.mobile-open { z-index: 120 }
+
 /* Social links bar used on HomeView */
 .social-bar { display:flex; gap:0.8rem; align-items:center; margin-top:0.6rem }
 .social-card { display:inline-flex; align-items:center; gap:0.6rem; padding:0.6rem 0.9rem; border-radius:10px; background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03); color:var(--fg); text-decoration:none; transition: transform .15s ease, box-shadow .15s ease, border-color .15s }

@@ -250,4 +250,16 @@ section { padding: 2rem 0 }
 @media (min-width:900px) {
   .timeline { gap:1.25rem }
 }
+
+/* Phone-friendly adjustments: stack entries, remove left timeline line and year column */
+@media (max-width: 480px) {
+  .vertical-timeline { padding-left: 12px }
+  .vertical-timeline:before { display: none }
+  .vt-entry { flex-direction: column; align-items: flex-start; padding: 0.6rem; gap: 0.6rem }
+  .vt-content ul { padding-left: 0.8rem }
+  .timeline-head .date { display: none }
+  .head-content h3 { font-size: 1rem }
+  .lead { font-size: 0.95rem }
+  .expanded-shell { padding: 0.85rem }
+}
 </style>

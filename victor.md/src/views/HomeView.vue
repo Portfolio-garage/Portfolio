@@ -25,6 +25,8 @@
           </ul>
         </article>
 
+        
+
         <article class="card card-skills">
           <h3>Currently learning</h3>
           <ul>
@@ -97,6 +99,14 @@ import Hero from '../components/Hero.vue'
 .proj-title { font-weight:600; color: #ffb07a }
 .proj-sub { margin-top:6px }
 .exp-meta, .edu-meta { font-size: 0.92rem; color: var(--muted); margin-bottom:8px }
+
+.proj-details { margin-top: 8px; color: var(--muted) }
+.proj-details summary { cursor: pointer; list-style: none; padding: 8px 0; font-weight:600; color: #fff }
+.proj-details summary::-webkit-details-marker { display:none }
+.proj-lead { margin: 0 0 8px; color: var(--muted) }
+.proj-details h4 { margin: 0.6rem 0 0.4rem; color:#fff }
+.proj-details ul { margin: 0 0 12px 1rem }
+.proj-details li { margin-bottom:6px }
 
 .personal-list { margin: 0; padding: 0; }
 .personal-list dt { font-weight:700; color:#fff; margin-top:10px }
